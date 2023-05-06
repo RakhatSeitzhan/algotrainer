@@ -1,0 +1,38 @@
+.CustomButton-1{
+    background-color: var(--bl-light);
+    color: var(--bl);
+    padding: 0.5rem 0.9rem;
+    border-radius: 1rem;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    transition: all 0.1s;
+    gap: 0.1rem;
+    cursor: pointer;
+}
+.CustomButton-1:hover{
+    background-color: var(--bl-light-2);
+}
+.CustomButton-1:active{
+    background-color: var(--bl-light);
+}
+.CustomButton-2{
+    background-color: var(--pur-light);
+    color: var(--pur);
+    padding: 0.5rem 0.9rem;
+    border-radius: 1rem;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    transition: all 0.1s;
+    gap: 0.1rem;
+    cursor: pointer;
+}
+.CustomButton-2:hover{
+    background-color: var(--pur-light-2);
+}
+.CustomButton-2:active{
+    background-color: var(--pur-light);
+}

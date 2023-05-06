@@ -1,0 +1,15 @@
+.Difficulty{
+   
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.Difficulty__container{
+    background-color: var(--gray-t1);
+    padding: 0.3rem 0.9rem;
+    border-radius: 1rem;
+}
+.Easy{
+    background-color: rgb(233, 245, 233);
+}

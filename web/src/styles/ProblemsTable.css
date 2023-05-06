@@ -1,0 +1,59 @@
+.ProblemsTable{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 5rem 1fr 2fr 1fr;
+    font-size: 0.9rem !important;
+}
+
+
+.ProblemsTable__item{
+    display: contents;
+    text-decoration: none;
+    color: black;
+}
+.ProblemsTable__index{
+    align-items: center;
+    
+}
+.ProblemsTable__item > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 2.5rem;
+}
+.ProblemsTable__item:nth-child(even) > div{
+    /* background-color: var(--gray-t1) !important; */
+    background-color: rgb(250, 251, 253) !important;
+}
+.ProblemsTable__item:hover > div{
+    transition: all 0.1s;
+    cursor: pointer;
+}
+
+.Easy {
+    color: green;
+}
+.Normal{
+    color: orange;
+}
+.Hard{
+    color: rgb(177, 3, 3);
+}
+.Unknown{
+    color: var(--gray);
+}
+
+.ProblemsTable__tags{
+    display: flex;
+    flex-direction: row !important;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content:  start !important;
+    align-items: center;
+}
+.ProblemsTable__tag{
+    padding: 0.3rem 0.9rem;
+    background-color: var(--gray-t1);
+    border-radius: 1rem;
+    height: fit-content;
+}

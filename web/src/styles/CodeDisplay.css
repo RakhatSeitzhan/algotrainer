@@ -1,0 +1,13 @@
+code{
+    font-family: "Menlo", "Monaco", "Courier New", monospace !important;
+    font-size: 0.75rem;
+}
+.hljs-number{
+    color: var(--bl);
+}
+pre{
+    margin: 0;
+}
+.CodeDisplay{
+    
+}

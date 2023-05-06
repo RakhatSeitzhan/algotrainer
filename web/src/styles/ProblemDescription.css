@@ -1,0 +1,39 @@
+.ProblemDescription{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    padding: 0 1.5rem;
+    background-color: white;
+    height: 100%;
+}
+.ProblemDescription__title{
+    font-size: 1.25rem;
+    margin: 1rem 0;
+}
+
+.ProblemDescription__tags{
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+.ProblemDescription__tag{
+    padding: 0.3rem 0.9rem;
+    background-color: var(--gray-t1);
+    border-radius: 1rem;
+}
+.ProblemDescription__description{
+    margin-bottom: 1rem;
+}
+.ProblemDescription__code{
+    background-color: var(--gray-t1); 
+    padding: 0.75rem 1rem; 
+    border-radius: 1rem;
+}
+
+.ProblemDescription__examples{
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+.ProblemDescription__exampleInputs{
+    margin-bottom: 1rem;
+}

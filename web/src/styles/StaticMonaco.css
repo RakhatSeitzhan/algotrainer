@@ -1,0 +1,12 @@
+.StaticMonaco .monaco-editor .cursors-layer .cursor {
+    display: none !important;
+}
+
+.StaticMonaco__container{
+    border-radius: 10px;
+    background-color: var(--gray-t1);
+    /* overflow: hidden; */
+    padding: 20px 0;
+    /* margin: 10px; */
+    /* background-color: var(--gray2); */
+}
