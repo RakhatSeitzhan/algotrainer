@@ -41,18 +41,19 @@
     background-color: rgb(250, 250, 252);
 }
 .CarouselComponent{
-    /* display: contents; */
     height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 .CarouselComponent__contents{
-    /* display: contents; */
+    height: 100%;
     flex-grow: 1;
     background-color: white !important;
 }
 .CarouselComponent__selected{
     background-color: white !important;
+}
+.Scrollable{
+    overflow: scroll;
+    height: 100%;
 }
 .Carousel{
     height: 100%;

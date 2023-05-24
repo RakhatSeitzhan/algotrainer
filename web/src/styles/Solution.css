@@ -1,0 +1,21 @@
+.Solution{
+    background-color: white;
+    font-size: 0.9rem;
+    padding: 1rem 1.5rem;
+    overflow:scroll;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.Solution__text{
+
+}
+.Solution__code{
+    background-color: var(--gray-t1);
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+}
+.Solution__title{
+    font-size: 1.2rem;
+}

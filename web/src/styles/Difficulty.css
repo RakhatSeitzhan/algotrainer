@@ -11,5 +11,16 @@
     border-radius: 1rem;
 }
 .Easy{
+    color: green;
     background-color: rgb(233, 245, 233);
+}
+
+.Normal{
+    color: orange;
+}
+.Hard{
+    color: rgb(177, 3, 3);
+}
+.Unknown{
+    color: var(--gray);
 }

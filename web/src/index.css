@@ -29,4 +29,8 @@ body {
   --gray-t3: #cacaca;
   --gray-t4: #7f868c;
   --black: #1c1c1c;
+  --red: rgb(177, 3, 3);
+  --green: green;
+  --red-light: rgb(253, 219, 219);
+  --green-light: rgb(233, 245, 233);
 }

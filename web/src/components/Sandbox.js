@@ -1,7 +1,8 @@
 import Editor from "@monaco-editor/react";
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import db from '../firebase.js'
-import { doc, setDoc, addDoc, collection } from "firebase/firestore"; 
+import { doc, setDoc, addDoc, collection, getDocs,updateDoc} from "firebase/firestore";
+import { executeCode2 } from "../utils/executeCode.js"; 
 export default function Sandbox(){
     const editorRef = useRef()
     const [testcases, setTestCases] = useState([])
@@ -11,32 +12,19 @@ export default function Sandbox(){
     const [tags, setTags] = useState('')
     const [title, setTitle] = useState('')
     const [difficulty, setDifficulty] = useState('')
+    const [sections, setSections] = useState([])
+    const [DBTags, setDBTags] = useState([])
     function handleEditorDidMount(editor, monaco) {
       editorRef.current = editor; 
     }
-    const runCode = () => {
-        const mainCode = editorRef.current.getValue()
-        const mainCodeFunction = new Function(`return ${mainCode}`)();
-        setTestCases(testcases.map(item => {
-            // arguments are passed to the function in the order of argNames
-            // const argsToPass = argNames.map(arg => JSON.parse(item.case[arg]))
-            // return {...item, result: JSON.stringify(mainCodeFunction(...argsToPass))}
-            return {...item, result: mainCodeFunction(...Object.keys(item.case).map(i => item.case[i]))}
-        }))
-    }
-    const normalizeTestCases = (ts) => {
-        let res = [...ts]
-        res.map(t=> {
-            // check if a testcase has nested object: example: [[],[]]
-            // "normalize" it to the following form to store in firebase: [{0: []},{1:[]}]
-            // make an inverse normalizer fucnction
-
-
-            // or alternative solution would be to store stringified testcases 
-            return 
-        })
-        return 
-    }
+    useEffect(() => {
+        const getDBTags = async () => {
+            const query = await getDocs(collection(db,"tags"))
+            setDBTags(query.docs.map(doc => ({id: doc.id, ...doc.data()})))
+        }
+        getDBTags()
+        
+    }, [])
     const changeInput = (e, index) => {
         let temp = [...inputValues]
         temp[index] = e.target.value
@@ -47,14 +35,37 @@ export default function Sandbox(){
         temp[index] = e.target.value
         setArgNames(temp)
     }
-    const addTestCase = () => {
+    const addTestCase = async() => {
         let a = {}
         argNames.forEach((arg, i) => a[arg] = inputValues[i])
-        const t = {case: a}
+        let t = {case: a}
+        const solutionCode = editorRef.current.getValue()    
+        const {result, logs, runtime, error} = await executeCode2(solutionCode, t, 10000)
+        t = {...t, result: JSON.stringify(result)}
+        if (error) new Error(error)
+        console.log(t)
         setTestCases([...testcases, t])
         setInputValues(inputValues.map(i => ''))
     }
-    const exportProblem = () => {
+    const addSection = () => {
+        setSections([...sections, {type: 'text', source: ''}])
+    }
+    const changeSectionType = (e, id) => {
+        let temp = [...sections]
+        temp[id].type = e.target.value
+        setSections(temp)
+    }
+    const changeSectionSource = (e, id) => {
+        let temp = [...sections]
+        temp[id].source = e.target.value
+        setSections(temp)
+    }
+    const onSectionEditorChange = (newVal, id) => { 
+        let temp = [...sections]
+        temp[id].source = newVal
+        setSections(temp)
+    }
+    const exportProblem = async () => {
         let problemObj = {}
         console.log(testcases)
         problemObj.testcases = testcases
@@ -62,10 +73,37 @@ export default function Sandbox(){
         problemObj.description = description
         problemObj.tags = tags.split(',')
         problemObj.title = title
+        problemObj.lowercaseTitle = title.replace(/\s/g,'').toLowerCase()
         problemObj.difficulty = Number(difficulty)
+        problemObj.sections = sections
         console.log(problemObj)
         addDoc(collection(db, "problems"), problemObj);
+        tags.split(',').forEach(tag => {
+            let inDB = false
+            for(var i = 0; i < DBTags.length; i++){
+                if (DBTags[i].name == tag) {
+                    inDB = true
+                    updateDoc(doc(db, "tags", DBTags[i].id), {
+                        numOfProblems: DBTags[i].numOfProblems + 1
+                    });
+                }
+            }
+            if (!inDB){
+                addDoc(collection(db, "tags"), {name: tag, numOfProblems: 1});
+            } 
+        })
     }
+    const updateTestCaseResults = async () => {
+        const solutionCode = editorRef.current.getValue()   
+        let newTestcases = [...testcases]
+        for (var i = 0; i < testcases.length; i++){
+            const {result, logs, runtime, error} = await executeCode2(solutionCode, testcases[i], 10000)
+            if (error) new Error(error)
+            newTestcases[i].result = JSON.stringify(result)
+        }
+        setTestCases(newTestcases)
+    }
+    const defaultCode = `function solve(){\n   let answer = []\n   return answer\n}`
     return (
         <div className="Sandbox">
             <Editor
@@ -73,14 +111,11 @@ export default function Sandbox(){
                 height="50vh"
                 width="50vw"
                 defaultLanguage="javascript"
-                defaultValue="// write a code "
+                defaultValue={defaultCode}
                 
                 onMount={handleEditorDidMount}
             />
-            <button onClick={runCode}>Run test cases</button>
             <button onClick={exportProblem}>Export</button>
-            <button onClick={e => setInputValues(inputValues.filter((item,index) => index != inputValues.length-1))}>-</button>
-            <button onClick={e => setInputValues([...inputValues, ''])}>+</button>
             <div>
                 <div>Title</div>
                 <input value={title} onChange = {e => setTitle(e.target.value)}></input>
@@ -91,6 +126,12 @@ export default function Sandbox(){
             </div>
             <div>
                 <div>Tags</div>
+                <div>Available tags:</div>
+                <ul>
+                    {DBTags.map(item => 
+                    <li>{item.name}</li>
+                    )}
+                </ul>
                 <input value={tags} onChange = {e => setTags(e.target.value)}></input>
             </div>
             <div>
@@ -98,13 +139,18 @@ export default function Sandbox(){
                 <input value = {difficulty} type = 'number' onChange={e => setDifficulty(e.target.value)}></input>
             </div>
             <div>
-                <div>Number of arguments</div>
-                <input type="number" value = {inputValues.length} onChange = {e => setInputValues([...inputValues, ''])}/>
+                <div>Number of arguments: {inputValues.length}</div>
+                <button onClick={e => setInputValues(inputValues.filter((item,index) => index != inputValues.length-1))}>-</button>
+                <button onClick={e => setInputValues([...inputValues, ''])}>+</button>
             </div>
-            <div>Current testcases</div>
-            {testcases.map(item => 
+            <div>Testcases</div>
+            {testcases.map((item, index) => 
             <div className="testcase">
-                {Object.keys(item.case).map(key=><>{item.case[key]}</>)}
+                <div>Testcase {index+1}</div>
+                <div>
+                    {Object.keys(item.case).map(key=><div>{key} = {item.case[key]}</div>)}
+                    <div>Result: {item.result}</div>
+                </div>
             </div>
             )}
             {inputValues.map((value, index) => 
@@ -114,21 +160,32 @@ export default function Sandbox(){
                 </div>
             )}
             <button onClick={() => addTestCase()}>Add testcase</button>
+            <button onClick={updateTestCaseResults}>Update testcase results</button>
+            {sections.map((section, sectionId) => 
+            <div>
+                <select value={section.type} onChange = {e => changeSectionType(e, sectionId)}>
+                    <option value='text'>Text</option>
+                    <option value='code'>Code</option>
+                    <option value='video'>Video</option>
+                </select>
+                {section.type == 'text' ? 
+                <textarea value={section.source} onChange= {e => changeSectionSource(e, sectionId)}/>
+                : section.type == 'code' ?
+                <Editor
+                    className='Editor'
+                    height="20vh"
+                    width="50vw"
+                    defaultLanguage="javascript"
+                    defaultValue='// write here your code...'
+                    onChange={(newVal, e) => onSectionEditorChange(newVal, sectionId)}
+                />
+                : section.type == 'video' &&
+                <input placeholder="Insert url" value={section.source} onChange= {e => changeSectionSource(e, sectionId)}/>
+                }
+                
+            </div>
+            )}
+            <button onClick={addSection}>Add explanation section</button>
         </div>
     )
-}
-
-function generateTestcase(pattern){
-    // a testcase: {case: {arg1: *, arg2: *, arg3: *}, result: *}
-    // patterm: [{argName: String, argType: *}]
-    // a pattern: {name: str, type: list, obj}
-    // basecases: number, string
-    // instructionsType: random, a set, a repetetive set
-    // instructions: {type: str, set: []}
-
-    switch (pattern.type){
-        case "list":
-
-            break;
-    }
 }

@@ -4,7 +4,8 @@
     font-size: 0.9rem;
     padding: 0 1.5rem;
     background-color: white;
-    height: 100%;
+    height: calc(100vh - 80px);
+    overflow: scroll;
 }
 .ProblemDescription__title{
     font-size: 1.25rem;
@@ -29,10 +30,23 @@
     padding: 0.75rem 1rem; 
     border-radius: 1rem;
 }
-
+.ProblemDescription__text{
+    font-family: "Menlo", "Monaco", "Courier New", monospace !important;
+    font-size: 0.75rem;
+}
+.ProblemDescription__container{
+    padding: 0.25rem 0 0.5rem 1.5rem;
+}
 .ProblemDescription__examples{
     font-size: 1.25rem;
     margin-bottom: 1rem;
+}
+.ProblemDescription__example{
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--gray-t1);
+    margin-bottom: 1rem;
+    margin-top: 0.25rem;
 }
 .ProblemDescription__exampleInputs{
     margin-bottom: 1rem;

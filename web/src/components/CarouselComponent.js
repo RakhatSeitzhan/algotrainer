@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import "../styles/Carousel.css"
+
 export default function CarouselComponent({ children, state, setState }){
     const normalizedChildren = () => {
         let childrenArray = children

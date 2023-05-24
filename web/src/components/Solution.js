@@ -1,36 +1,30 @@
 import "../styles/Solution.css"
-// import CodeDisplay from "./CodeDisplay"
-import Editor from "@monaco-editor/react";
-
+import CodeDisplay from "./CodeDisplay";
 export default function Solution({ problem }){
-    const editorOptions = {
-        minimap: { enabled: false },
-        scrollBeyondLastLine: false,
-        autoIndent: true,
-        formatOnPaste: true,
-        formatOnType: true,
-        overviewRulerLanes: 0,
-        hideCursorInOverviewRuler: true,
-        scrollbar: {
-            vertical: 'hidden'
-        },
-        overviewRulerBorder: false,
-    }
     return (
     <div className="Solution">
+        <div className="Solution__title">Explanation</div>
+        {problem.sections &&
+        problem.sections.map(item => 
+        <div>
+        {item.type == 'text' ? 
+            <div>&emsp;&emsp;{item.source}</div>
+            :
+            item.type == 'code' ? 
+            <div className="Solution__code">
+                <CodeDisplay code = {item.source}/>
+            </div>
+            :
+            item.type == 'video' &&
+            <iframe className="Solution__video" src = {item.source}></iframe>
+            // <iframe width="560" height="315" src="https://www.youtube.com/embed/H7u0Zrra060" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        }
+        </div>
+        )
+        }
+        <div className="Solution__title">Solution</div>
         {problem.solution &&
-            <Editor
-            className='ProblemWorkspace__editor'
-            height="50vh"
-            width="100%"
-            defaultLanguage="javascript"
-            value={problem.solution}
-            // defaultValue={defaultCode}
-            // onMount={handleEditorDidMount}
-            options = {editorOptions}
-        />}
-        
-        {/* <div style={customStyle}>Example text asdf;kasjdfklja;lskdjf</div> */}
-        {/* {problem && <CodeHighlighter codeString = {problem.solution}/>} */}
+            <div className="Solution__code"><CodeDisplay code = {problem.solution}/></div>
+        }
     </div>)
 }
