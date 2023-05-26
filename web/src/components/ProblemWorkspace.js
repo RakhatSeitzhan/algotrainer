@@ -34,8 +34,12 @@ export default function ProblemWorkspace(){
             setProblem(problemData)
             setCustomTestcase(structuredClone(problemData.testcases[0]) )
             const data = getLocalStorageData()
+            const newDefaultCode = `function solve(${Object.keys(problemData.testcases[0].case).sort().join(', ')}){\n   let answer = []\n   return answer\n}`
+            setDefaultCode(newDefaultCode)
             if (data) editorRef.current.setValue(data.code)
-            else editorRef.current.setValue(`function solve(${Object.keys(problemData.testcases[0].case).join(', ')}){\n   let answer = []\n   return answer\n}`)
+            else {
+                editorRef.current.setValue(newDefaultCode)
+            }
         } else {
             console.log("No such document! You should have been redirected to problems page!");
         }
@@ -44,8 +48,7 @@ export default function ProblemWorkspace(){
     useEffect(() => {
         requestProblem()
     },[])
- 
-    const defaultCode = `function solve(){\n   let answer = []\n   return answer\n}`
+    const [defaultCode, setDefaultCode] = useState(`function solve(){\n   let answer = []\n   return answer\n}`)
  
     const handleRun = async () => {
         setExecutingCode(true)
@@ -85,11 +88,15 @@ export default function ProblemWorkspace(){
     const saveCodeToLocalStorage = (status) => {
         localStorage.setItem(problemid, JSON.stringify({status: status, code: editorRef.current.getValue()}))
     }
+    const deleteFromLocalStorage = () => {
+        localStorage.removeItem(problemid);
+    }
     const problemSolved = () => {
         saveCodeToLocalStorage('solved')
     }
     const reset = () => {
         editorRef.current.setValue(defaultCode)
+        deleteFromLocalStorage()
     }
     const [carouselState, setCarouselState ]= useState(0)
     return (

@@ -38,9 +38,8 @@ export default function ProblemDescription({ problem }){
                     <div className="ProblemDescription__example">
                         <div className="ProblemDescription__text">Input:</div>
                         <div className="ProblemDescription__container">
-                        {Object.keys(testcase.case).map(key => 
-                            <CodeDisplay code = {key + ' = ' + testcase.case[key]}></CodeDisplay>
-                        )}
+                        <CodeDisplay code = {Object.keys(testcase.case).sort().map(key => key + ' = ' + testcase.case[key]).join('\n')}></CodeDisplay>
+                        
                         </div>
                         <div className="ProblemDescription__text">Output:</div>
                         <div className="ProblemDescription__container">

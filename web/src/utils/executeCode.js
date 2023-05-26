@@ -42,8 +42,7 @@ function executeCode (code, testcase, runTimeLimit){
     return runInSeparateThread(codeFunction, runTimeLimit)
 }
 async function executeCode2(code, testcase, runTimeLimit){
-    const args = Object.keys(testcase.case).map(key => testcase.case[key])
-    console.log(args.join(', '))
+    const args = Object.keys(testcase.case).sort().map(key => testcase.case[key])
     const codeFunction = Function('console', code + `return solve(${args.join(', ')});`)
     let res = {result: undefined, runtime: undefined, error: undefined, logs: []}
     try {
@@ -65,5 +64,5 @@ export {executeCode, runInSeparateThread, executeCode2}
 
 //City names = ["Almaty", "Astatna", "Shymkent", "Tashkent","Balqash","Taldykorgan", "Sidney"]
 //Cons = ["Almaty-Taldykorgan","Taldykorgan-Astana", "Almaty-Shymkent","Taldykorgan-Balqash","Shymkent-Tashkent"]
-Start = "Almaty"
-Dest = "Astana"
+// Start = "Almaty"
+// Dest = "Astana"

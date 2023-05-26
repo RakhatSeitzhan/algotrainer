@@ -16,10 +16,12 @@
 }
 
 .Normal{
-    color: orange;
+    color: rgb(238, 135, 0);
+    background-color: rgb(255, 249, 238);
 }
 .Hard{
     color: rgb(177, 3, 3);
+    background-color: rgb(233, 205, 205);
 }
 .Unknown{
     color: var(--gray);

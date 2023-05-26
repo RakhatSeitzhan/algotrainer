@@ -5,10 +5,15 @@ code{
 .hljs-number{
     color: var(--bl);
 }
+
 pre{
     margin: 0;
     padding: 0 !important;
 }
 .CodeDisplay{
     
+}
+
+.hljs-params{
+    opacity: 0.467;
 }

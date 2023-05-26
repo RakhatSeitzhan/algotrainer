@@ -7,19 +7,27 @@ export default function CodeDisplay({ code }){
         <CodeHighlighter code = {code}/>
     </div>)
 }
+
 const graycolor = getComputedStyle(document.documentElement).getPropertyValue('--gray-t1');
+const pur = getComputedStyle(document.documentElement).getPropertyValue('--pur-dark');
 const CodeHighlighter = ({code}) => {
+    let customTheme = {...vs}
+    customTheme['hljs-keyword'] = {color: pur}
     const customStyle = {
         fontFamily: "Menlo, Monaco, Courier New, monospace",
         // backgroundColor: graycolor,
-        backgroundColor: 'inherit'
+        backgroundColor: 'inherit',
+        // hljsKeyword: ''
     };
+    console.log(customTheme)
     return (
         <SyntaxHighlighter 
             language="javascript" 
-            style={vs} 
+            style={customTheme} 
             customStyle={customStyle}
         >
+            {/* {code.replace(/\b(const|function|console|let)\b/g, (match) => <span>{match}</span>)} */}
+
             {code}
         </SyntaxHighlighter>
     );
