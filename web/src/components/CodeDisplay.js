@@ -15,19 +15,14 @@ const CodeHighlighter = ({code}) => {
     customTheme['hljs-keyword'] = {color: pur}
     const customStyle = {
         fontFamily: "Menlo, Monaco, Courier New, monospace",
-        // backgroundColor: graycolor,
         backgroundColor: 'inherit',
-        // hljsKeyword: ''
     };
-    console.log(customTheme)
     return (
         <SyntaxHighlighter 
             language="javascript" 
             style={customTheme} 
             customStyle={customStyle}
         >
-            {/* {code.replace(/\b(const|function|console|let)\b/g, (match) => <span>{match}</span>)} */}
-
             {code}
         </SyntaxHighlighter>
     );

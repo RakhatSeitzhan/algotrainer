@@ -4,6 +4,7 @@ import ProblemsTable from './components/ProblemsTable';
 import { Header } from './components/Header';
 import "./styles/CustomStyles.css"
 import ProblemsPage from './components/ProblemsPage';
+import Homepage from './components/homepage/Homepage';
 import {
   BrowserRouter as Router,
   Route,
@@ -20,6 +21,7 @@ function App() {
         <SkeletonTheme baseColor={gray} highlightColor={grayLight} borderRadius = '1rem'>
           <Header/>
           <Routes>
+            <Route path ="/" element = {<Homepage/>} />
             <Route path ="/problems" element = {<ProblemsPage/>} />
             <Route path ="/sandbox" element = {<Sandbox/>}/>
             <Route path ="/problems/:problemid" element = {<ProblemWorkspace/>}/>

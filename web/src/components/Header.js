@@ -15,7 +15,7 @@ export function Header(){
             </div>
            
 
-            <Link to = "/learn" className="Header__link">Home</Link>
+            <Link to = "/" className="Header__link">Home</Link>
             <Link to = "/problems" className="Header__link">Problems</Link>
          
         </div>

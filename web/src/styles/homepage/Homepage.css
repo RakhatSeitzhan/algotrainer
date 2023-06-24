@@ -1,0 +1,92 @@
+.Homepage{
+    display: flex;
+    flex-direction: column;
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.Homepage__row{
+    display: flex;
+    height: 90vh;
+}
+.Homepage__title{
+    font-size: 3.5rem;
+    font-weight: 500;
+    /* color: #0a2540; */
+    color: #2e3648
+}
+.Homepage__text{
+    font-size: 1rem;
+    color: #425466;
+}
+.Homepage__dashedLine{
+    width: 1px;
+    height: 100%;
+    margin: 0 1rem;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23E9F0F8FF' stroke-width='4' stroke-dasharray='10 20' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+.Homepage__description{
+    padding-top: 2rem;
+    width: 50%;
+    padding-right: 4rem;
+}
+.Homepage__illustration{
+    padding-top: 2rem;
+    width: 50%;
+}
+.code-container{
+    white-space: pre;
+    font-family: "Menlo", "Monaco", "Courier New", monospace !important;
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+}
+.invisiblecode{
+    visibility: hidden;
+    position: absolute;
+}
+.Homepage__window{
+    /* padding: 1.5rem; */
+    border-radius: 1rem;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+}
+.Homepage__windowHeader{
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--gray-t1);
+    padding: 0.75rem 1.5rem;
+}
+
+.Homepage__windowHeader > div{
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+.Homepage__headerItem1{
+    background-color: rgb(255, 111, 111);
+}
+.Homepage__headerItem2{
+    background-color: rgb(255, 186, 58);
+}
+.Homepage__headerItem3{
+    background-color: rgb(31, 199, 25);
+}
+.Homepage__windowEditorContainer{
+    display: flex;
+    line-height: 1.2rem;
+    gap: 1rem;
+
+}
+
+.Homepage__windowNumbers{
+    display: flex;
+    flex-direction: column;
+    color: var(--bl);
+    font-family: "Menlo", "Monaco", "Courier New", monospace !important;
+    font-size: 0.8rem;
+    border-right: 1px solid var(--gray-t1);
+    padding: 0.5rem 1rem;
+}
+.Homepage__windowNumber{
+   text-align: center;
+}
