@@ -1,0 +1,215 @@
+.BlcokAnimation{
+    margin: 3rem auto;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 76px 86px 76px 82px 76px;
+    grid-template-rows: 76px 86px 76px;
+}
+.BlockAnimation__block{
+    background-color: white;
+    border: 2px solid var(--gray-t1);
+    scale: 1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height:  2.75rem;
+}
+.BlockAnimation__block.animate{
+    animation-name: blockApperance;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+.block-Coding{
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+.block-Testing{
+    grid-row-start: 1;
+    grid-column-start: 3;
+}
+.block-Fixing{
+    grid-row-start: 3;
+    grid-column-start: 3;
+}
+.block-Submission{
+    grid-row-start: 3;
+    grid-column-start: 5;
+}
+.path-1{
+    stroke-dashoffset: 86;
+    grid-row-start: 1;
+    grid-column-start: 2;
+} 
+.path-2{
+    stroke-dashoffset: 86;
+    grid-row-start: 2;
+    grid-column-start: 3;
+}
+.path-3 {
+    stroke-dashoffset: 310;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 4;
+
+}
+.path-4{
+    stroke-dashoffset: 86;
+    grid-row-start: 3;
+    grid-column-start: 4;
+}
+.path-3.animate{
+    animation-name: pathAnimation2;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+}
+.BlockAnimation__path{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.path-1.animate ,  .path-2.animate, .path-4.animate{
+    animation-name: pathAnimation;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+}
+.BlockAnimation__icon{
+    position: absolute;
+    stroke: var(--gray-t1);
+    fill-opacity: 0;
+    stroke-width: 2.5px;
+}
+.BlockAnimation__icon.animate{
+    animation-name: icon1Apperance;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode:both;
+}
+.BlockAnimation__text{
+    font-size: 0.9rem;
+    color: var(--bl);
+    opacity: 0;
+}
+.BlockAnimation__text.animate{
+    animation-name: textApperance;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode:both;
+}
+
+@keyframes blockApperance {
+    0% {
+        border: 1.5px solid var(--gray-t1);
+        box-shadow: 0px 4px 10px 2px rgba(0, 15, 73, 0);
+        scale: 1;
+        
+    }
+    7%{
+        border: 1.5px solid rgba(255, 0, 0, 0);
+        scale: 1.05;
+        box-shadow: 0 12.6px 25.2px -11.5733px rgba(50,50,93,.25), 0 7.56px 15.12px -7.56px rgba(0,0,0,.1);
+    }
+    93%{
+        border: 1.5px solid rgba(255, 0, 0, 0);
+        scale: 1.05;
+        box-shadow: 0 12.6px 25.2px -11.5733px rgba(50,50,93,.25), 0 7.56px 15.12px -7.56px rgba(0,0,0,.1);
+    }
+    100%{
+        border: 1.5px solid var(--gray-t1);
+        box-shadow: 0px 4px 10px 2px rgba(0, 15, 73, 0);
+        scale: 1;
+    }
+}
+@keyframes textApperance {
+    5% {
+        opacity: 0;
+        transform: translateY(20px);
+    } 
+    7% {
+        opacity: 1;
+        transform: translateY(15px);
+    }
+    93%{
+        opacity: 1;
+        transform: translateY(15px);
+    }
+    95%{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+@keyframes icon1Apperance {
+    0% {
+        transform: translateY(0px);
+        stroke-opacity: 1;
+        scale: 1;
+        fill-opacity: 0;
+    } 
+    7% {
+        transform: translateY(-10px);
+        stroke-opacity: 0;
+        scale: 0.9;
+        fill-opacity: 1;
+    }
+    93%{
+        transform: translateY(-10px);
+        stroke-opacity: 0;
+        scale: 0.9;
+        fill-opacity: 1;
+    }
+    100%{
+        transform: translateY(0px);
+        stroke-opacity: 1;
+        scale: 1;
+        fill-opacity: 0;
+    }
+}
+@keyframes pathAnimation {
+    0%{
+        stroke-dashoffset: 86
+    }
+    40%{
+        stroke-dashoffset: 0%;
+    }
+    60%{
+        stroke-dashoffset: 0%;
+    }
+    100%{
+        stroke-dashoffset: -86;
+    }
+}
+@keyframes pathAnimation2 {
+    0%{
+        stroke-dashoffset: 310
+    }
+    40%{
+        stroke-dashoffset: 0;
+    }
+    60%{
+        stroke-dashoffset: 0;
+    }
+    100%{
+        stroke-dashoffset: -310;
+    }
+}
+
+
+.BlcokAnimation__sideText1{
+    font-size: 0.9rem;
+    color: #425466;
+    width: 120px;
+    align-self: center;
+}
+.BlcokAnimation__sideText2{
+    font-size: 0.9rem;
+    color: #425466;
+    grid-row-start: 3;
+    width: 120px;
+    align-self: center;
+}

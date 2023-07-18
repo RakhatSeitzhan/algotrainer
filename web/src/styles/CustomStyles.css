@@ -10,6 +10,7 @@
     transition: all 0.1s;
     gap: 0.1rem;
     cursor: pointer;
+    text-decoration: none !important;
 }
 .CustomButton-1:hover{
     background-color: var(--bl-light-2);

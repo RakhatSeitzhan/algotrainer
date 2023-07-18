@@ -7,7 +7,7 @@
 }
 .Homepage__row{
     display: flex;
-    height: 90vh;
+    height: calc(100vh - 41px);
 }
 .Homepage__title{
     font-size: 3.5rem;
@@ -26,9 +26,10 @@
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23E9F0F8FF' stroke-width='4' stroke-dasharray='10 20' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 .Homepage__description{
-    padding-top: 2rem;
+    padding-top: 15rem;
     width: 50%;
     padding-right: 4rem;
+    padding-left: 2rem;
 }
 .Homepage__illustration{
     padding-top: 2rem;
@@ -45,9 +46,8 @@
     position: absolute;
 }
 .Homepage__window{
-    /* padding: 1.5rem; */
     border-radius: 1rem;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 12.6px 25.2px -11.5733px rgba(50,50,93,.25), 0 7.56px 15.12px -7.56px rgba(0,0,0,.1);
     overflow: hidden;
 }
 .Homepage__windowHeader{
@@ -89,4 +89,18 @@
 }
 .Homepage__windowNumber{
    text-align: center;
+}
+
+.Homepage__logo{
+    display: flex;
+    align-items: center;
+}
+.Homepage__logoText{
+    font-size: 70px;
+    font-weight: 300;
+    color: var(--bl);
+}
+.Homepage__link{
+    display: flex;
+    align-items: center;
 }

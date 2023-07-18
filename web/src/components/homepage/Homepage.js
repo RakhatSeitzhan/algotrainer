@@ -2,7 +2,9 @@ import "../../styles/homepage/Homepage.css"
 import CodeDisplay from "../CodeDisplay"
 import Typed from 'react-typed';
 import React, { useEffect, useRef,useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Link } from "react-router-dom";
+import { GrFormNext } from 'react-icons/gr'
+import BlockAnimation from "./BlockAnimation";
 // import Typed from 'typed.js'
 export default function Homepage(){
     const code = `function solve(arr){
@@ -20,12 +22,25 @@ export default function Homepage(){
         <div className="Homepage__row">
             <div className="Homepage__dashedLine"></div>
             <div className="Homepage__description">
-                <div className="Homepage__title">Solve problems</div>
-                <div className="Homepage__text">
-                    Algotrainer provides wide variety of problems 
-                    covering vital aspects of computer science
+                <div className="Homepage__logo">
+                    <svg  height="50" viewBox="0 0 80 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 64L36.3 5.45874C38.15 2.18042 41.85 2.18042 43.7 5.45874L77 64" stroke="#5884EC" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M40 25L26 51H54" stroke="#7658EC" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span className="Homepage__logoText">lgotrainer</span>
                 </div>
-                
+                <div className="Homepage__text">
+                    Learn algorithms by solving problems.
+                </div>
+                <div className="Homepage__text">
+                    Test your knowledge.
+                </div>
+                <div className="Homepage__link">
+                    <Link className="CustomButton-1" to = '/problems'>
+                        Get started 
+                        <GrFormNext/>
+                    </Link>
+                </div>
             </div>
             <div className="Homepage__dashedLine"></div>
             <div className="Homepage__illustration">
@@ -47,6 +62,7 @@ export default function Homepage(){
                     </div>
                 
                 </div>
+                <BlockAnimation/>
             </div>
             <div className="Homepage__dashedLine"></div>
         </div>
@@ -63,12 +79,13 @@ const CodeAnimation = ({lines}) => {
     const tempcode = spanList &&  Object.keys(spanList).map(key => 
         `<span class="${spanList[key].classList[0]}" style ="color: ${spanList[key].style.color}" >${spanList[key].innerHTML}</span>`
     ).join('')
+    
     setCode(tempcode)
   },[])
   return (
     <div className="code-container">
         <div className="invisiblecode" ref= {codeRef}><CodeDisplay code = {lines} /></div>
-        <Typed typeSpeed={30} strings={[code ? code : '']}></Typed>       
+        {code != '' && <Typed typeSpeed={30} strings={[code]}></Typed>}
     </div>
   );
 };
