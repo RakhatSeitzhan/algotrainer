@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import "./styles/CustomStyles.css"
 import ProblemsPage from './components/ProblemsPage';
 import Homepage from './components/homepage/Homepage';
+import Projects from './pages/Projects';
 import {
   BrowserRouter as Router,
   Route,
@@ -22,6 +23,7 @@ function App() {
             <Route path ="/" element = {<Homepage/>} />
             <Route path ="/problems" element = {<ProblemsPage/>} />
             <Route path ="/problems/:problemid" element = {<ProblemWorkspace/>}/>
+            <Route path ="/projects" element = {<Projects/>}/>
           </Routes>
         </SkeletonTheme>
       </div>
